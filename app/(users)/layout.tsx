@@ -1,11 +1,6 @@
-import type { Metadata } from "next";
 import Link from "next/link";
-export const metadata: Metadata = {
-  title: "User Page",
-  description: "userPage",
-};
 
-export default function UserLayout({
+export default async function UserLayout({
   children,
 }: {
   children: React.ReactNode;

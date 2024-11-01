@@ -7,15 +7,16 @@ export default function About() {
       <h1>Users</h1>
       <ul>
         <li>
-          <Link href="/users/1">User1</Link>
+          <Link href="/users/tangwenping">tangwenping</Link>
         </li>
         <li>
-          <Link href="/users/3">User3</Link>
+          <Link href="/users/tovinping">tovinping</Link>
         </li>
         <li>
-          <Link href="/users/4">User4</Link>
+          <Link href="/users/testUser">testUser</Link>
         </li>
       </ul>
     </div>
   );
 }
+
