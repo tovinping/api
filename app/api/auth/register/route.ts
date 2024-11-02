@@ -11,16 +11,12 @@ export async function POST(req: Request) {
     const body = await req.json();
 
     const { username, password, email } = body;
-    console.log(
-      `username =${username}, password =${password}, email =${email}`
-    );
     await dbConnect();
 
     // 检查用户是否已存在
     const existingUser = await User.findOne({
       $or: [{ email }, { username }],
     });
-    console.log(`existingUser =${existingUser}`);
     if (existingUser) {
       return NextResponse.json(
         {
@@ -39,7 +35,6 @@ export async function POST(req: Request) {
     await user.save();
     // 不返回密码字段
     user.password = undefined;
-    console.log(`user =${user}`);
     return NextResponse.json({
       success: true,
       data: user,

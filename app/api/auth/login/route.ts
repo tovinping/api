@@ -27,7 +27,6 @@ export async function POST(req: Request) {
         { status: 404 }
       )
     }
-    console.log(`user = ${user}`)
     // 4. 验证密码
     const isValid = await bcrypt.compare(password, user.password)
     if (!isValid) {
