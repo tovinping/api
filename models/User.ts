@@ -62,7 +62,7 @@ const userSchema = new mongoose.Schema({
   },
   
   // 账户安全
-  lastLogin: Date,
+  lastLoginAt: Date,
   passwordChangedAt: Date,
   passwordResetToken: String,
   passwordResetExpires: Date,
@@ -119,11 +119,6 @@ userSchema.methods.createPasswordResetToken = function() {
   return resetToken;
 };
 
-// 在 schema 定义后，模型创建前添加
-userSchema.pre(/^find/, function(this: mongoose.Query<any, any>, next) {
-  this.select('-_id');
-  next();
-});
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 

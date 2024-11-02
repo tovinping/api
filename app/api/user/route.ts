@@ -13,8 +13,8 @@ export async function GET(request: Request) {
 
     if (userId) {
       // 如果提供了用户ID，查询特定用户
-      const query = await User.findOne({ username: userId });
-      return NextResponse.json(query);
+      const user = await User.findOne({ username: userId }, { _id: 0 });
+      return NextResponse.json(user);
     } else {
       return NextResponse.json({ message: "请提供用户ID" }, { status: 401 });
     }

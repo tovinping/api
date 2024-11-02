@@ -1,7 +1,6 @@
 import { NextResponse } from 'next/server'
 import dbConnect from '@/lib/mongodb'
 import User from '@/models/User'
-import bcrypt from 'bcryptjs'
 import jwt from 'jsonwebtoken'
 
 export async function POST(req: Request) {
@@ -28,13 +27,16 @@ export async function POST(req: Request) {
       )
     }
     // 4. 验证密码
-    const isValid = await bcrypt.compare(password, user.password)
+    const isValid = await user.comparePassword(password)
     if (!isValid) {
       return NextResponse.json(
         { error: '密码错误' },
         { status: 401 }
       )
     }
+    // 更新最后登录时间
+    user.lastLoginAt = new Date()
+    await user.save()
 
     // 5. 生成 JWT token
     const token = jwt.sign(
