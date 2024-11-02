@@ -23,7 +23,7 @@ class MyRes {
 
 async function checkAuth(req: NextApiRequest): Promise<IJwt> {
   const reqPath = req.url!.split("?")[0];
-  const notAuth = ["/api/auth/login"].includes(reqPath);
+  const notAuth = ["/api/auth/login", "/api/auth/register"].includes(reqPath);
   if (notAuth) return {} as IJwt;
   const token = req.headers.authorization;
   try {

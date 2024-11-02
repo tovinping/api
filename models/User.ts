@@ -38,6 +38,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     default: 'default-avatar.png'
   },
+  // 个人简介
   bio: {
     type: String,
     maxLength: [200, '个人简介最多200个字符']
@@ -77,7 +78,8 @@ const userSchema = new mongoose.Schema({
     default: Date.now
   }
 }, {
-  timestamps: true  // 自动管理 createdAt 和 updatedAt
+  timestamps: true,  // 自动管理 createdAt 和 updatedAt
+  versionKey: false  // 禁用 __v 版本键
 });
 
 // 索引
@@ -116,6 +118,12 @@ userSchema.methods.createPasswordResetToken = function() {
   
   return resetToken;
 };
+
+// 在 schema 定义后，模型创建前添加
+userSchema.pre(/^find/, function(this: mongoose.Query<any, any>, next) {
+  this.select('-_id');
+  next();
+});
 
 const User = mongoose.models.User || mongoose.model('User', userSchema);
 
