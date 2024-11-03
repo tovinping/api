@@ -17,7 +17,10 @@ export async function httpGet(url: string) {
   if (res.status === 401) {
     redirect("/login");
   }
-  const data = await res.json();
-  console.log('ssss', url, data)
-  return data;
+  try {
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error('httpGet error=', error, res.status, res.statusText)
+  }
 }

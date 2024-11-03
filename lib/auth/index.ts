@@ -28,7 +28,7 @@ export async function signJwt(payload: UserJwtPayload) {
     .setProtectedHeader({ alg: "HS256" })
     .setJti(nanoid())
     .setIssuedAt()
-    .setExpirationTime(isProduction ? "4h" : "300s")
+    .setExpirationTime(isProduction ? "4h" : "5m")
     .sign(new TextEncoder().encode(process.env.JWT_SECRET));
 
   return token;

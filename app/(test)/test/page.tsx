@@ -1,6 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { formatDate } from '@/lib/time/transform'
 interface IUser {
     username: string
     email: string
@@ -28,13 +29,13 @@ export default function TestPage() {
     getData()
   }, [])
   return <section>
-    <h1>用户名:{data?.username}</h1>
+    <h1>用户名: {data?.username}</h1>
     <h1>邮箱: {data?.email}</h1>
     <h1>头像: {data?.avatar}</h1>
     <h1>是否已失效: {data?.isActive ? '是' : '否'}</h1>
     <h1>邮件是否已验证: {data?.isEmailVerified ? '是' : '否'}</h1>
     <h1>角色: {data?.role}</h1>
-    <h1>创建时间: {data?.createdAt}</h1>
-    <h1>最后一次登录时间: {data?.lastLoginAt}</h1>
+    <h1>创建时间: {formatDate(data?.createdAt)}</h1>
+    <h1>最后一次登录时间: {formatDate(data?.lastLoginAt)}</h1>
   </section>
 }
