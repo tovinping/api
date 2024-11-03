@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server'
 import dbConnect from '@/lib/mongodb'
 import User from '@/models/User'
-import jwt from 'jsonwebtoken'
-
+import { signJwt } from '@/lib/auth'
 export async function POST(req: Request) {
   try {
     await dbConnect()
@@ -39,13 +38,7 @@ export async function POST(req: Request) {
     await user.save()
 
     // 5. 生成 JWT token
-    const token = jwt.sign(
-      { 
-        username: user.username,
-      },
-      process.env.JWT_SECRET || 'your-secret-key',
-      { expiresIn: '24h' }
-    )
+    const token = await signJwt({ username: user.username } );
 
     // 6. 返回用户信息和 token
     return NextResponse.json({
