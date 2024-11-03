@@ -36,18 +36,24 @@ export async function POST(req: Request) {
     // 更新最后登录时间
     user.lastLoginAt = new Date()
     await user.save()
-
     // 5. 生成 JWT token
-    const token = await signJwt({ username: user.username } );
+    const token = await signJwt({ username: user.username });
 
-    // 6. 返回用户信息和 token
-    return NextResponse.json({
+    const res = NextResponse.json({
       message: '登录成功',
       user: {
         username: user.username
       },
       token
     })
+
+    res.cookies.set('token', token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',  // 生产环境使用 true，开发环境使用 false
+      sameSite: 'strict',
+      path: '/',
+    })
+    return res;
 
   } catch (error) {
     console.error('Login error:', error)

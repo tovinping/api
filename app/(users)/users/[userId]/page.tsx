@@ -3,7 +3,7 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   return {
-    title: "User PageA",
+    title: "Profile",
     description: "userPage",
     other: {
       "Cache-Control": "public, max-age=31536000, immutable",

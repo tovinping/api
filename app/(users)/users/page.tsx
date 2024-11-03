@@ -1,7 +1,9 @@
+import { httpGet } from "@/lib/request/serverSide";
 import Link from "next/link";
 
-export default function About() {
-  console.log(`server or client?`);
+export default async function Users() {
+  const data = await httpGet('/user?userId=jackson')
+  if (!data) return;
   return (
     <div>
       <h1>Users</h1>
