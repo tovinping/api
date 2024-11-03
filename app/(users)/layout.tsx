@@ -21,6 +21,7 @@ export default async function ProtectedLayout({
     <div>
       <nav>
         <Link href="/">Home</Link>
+        <Link href="/logout">Logout</Link>
       </nav>
       {children}
     </div>
