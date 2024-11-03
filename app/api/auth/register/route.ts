@@ -40,10 +40,11 @@ export async function POST(req: Request) {
       data: user,
     });
   } catch (error) {
+    console.error('register error=', error)
     return NextResponse.json(
       {
         success: false,
-        message: (error as Error).message,
+        message: (error as Error).message.split(':').pop(),
       },
       { status: 500 }
     );

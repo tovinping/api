@@ -25,7 +25,7 @@ const userSchema = new mongoose.Schema({
   password: {
     type: String,
     required: [true, '请输入密码'],
-    minlength: [6, '密码至少6个字符'],
+    minLength: [6, '密码至少6个字符'],
     select: false  // 查询时默认不返回密码字段
   },
   
@@ -34,6 +34,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     trim: true
   },
+  // 头像
   avatar: {
     type: String,
     default: 'default-avatar.png'
@@ -43,6 +44,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     maxLength: [200, '个人简介最多200个字符']
   },
+  // 电话
   phone: String,
   
   // 用户状态
@@ -57,7 +59,7 @@ const userSchema = new mongoose.Schema({
   // 角色
   role: {
     type: String,
-    enum: ['user', 'admin', 'superadmin'],
+    enum: ['user', 'admin', 'superAdmin'],
     default: 'user'
   },
   

@@ -35,7 +35,12 @@ export default async function RootLayout({
         </div>
       ) : (
         <div>
-          <Link href="/login">Login</Link>
+          <div>
+            <Link href="/login">Login</Link>
+          </div>
+          <div>
+            <Link href="/register">Register</Link>
+          </div>
         </div>
       )}
       {children}

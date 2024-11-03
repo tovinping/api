@@ -21,6 +21,6 @@ export async function httpGet(url: string) {
     const data = await res.json();
     return data;
   } catch (error) {
-    console.error('httpGet error=', error, res.status, res.statusText)
+    console.error('httpGet error=', error, res.status, res.statusText, url)
   }
 }
