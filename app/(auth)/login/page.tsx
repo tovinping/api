@@ -28,13 +28,13 @@ export default function Login() {
 
       const data = await res.json()
 
-      // if (!res.ok) {
-      //   throw new Error(data.error || 'Login failed')
-      // }
+      if (!res.ok) {
+        throw new Error(data.error || 'Login failed')
+      }
 
       // 登录成功，跳转到首页
-      // router.push('/')
-      // router.refresh()
+      router.push('/')
+      router.refresh()
     } catch (err: any) {
       setError(err.message)
     }

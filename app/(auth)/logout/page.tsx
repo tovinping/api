@@ -1,8 +1,12 @@
 "use client";
 import { useRouter } from "next/navigation";
+import React, { useEffect } from "react";
 
-export default function Logout({ children }: { children: React.ReactNode }) {
+const LogoutPage: React.FC = () => {
   const router = useRouter();
+  useEffect(() => {
+    handleLogout();
+  }, []);
 
   const handleLogout = async () => {
     try {
@@ -11,20 +15,19 @@ export default function Logout({ children }: { children: React.ReactNode }) {
       });
 
       if (response.ok) {
-        // 退出至首页
-        router.replace("/");
+        setTimeout(() => {
+          router.replace("/");
+        }, 1000);
       }
     } catch (error) {
       console.error("Logout failed:", error);
     }
   };
-
   return (
-    <button
-      onClick={handleLogout}
-      className="text-gray-600 hover:text-gray-900"
-    >
-      Logout
-    </button>
+    <div>
+      <h1>你已经登出, 1秒后跳转回首页面</h1>
+    </div>
   );
-}
+};
+
+export default LogoutPage;
