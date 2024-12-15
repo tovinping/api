@@ -1,4 +1,3 @@
-import BackButton from "@/components/Button/BackButton";
 import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -20,7 +19,6 @@ export default async function UserPage({
   console.log(`UserPage? ${userId}`);
   return (
     <section>
-      <BackButton />
       <h1>your select user: {userId}</h1>
     </section>
   );
