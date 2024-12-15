@@ -1,3 +1,4 @@
+// pages/login.tsx
 'use client'
 
 import { useState } from 'react'
@@ -53,7 +54,12 @@ export default function Login() {
           )}
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
+              <label htmlFor="username" className="sr-only">
+                用户名
+              </label>
               <input
+                id="username"
+                name="username"
                 type="text"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -65,7 +71,12 @@ export default function Login() {
               />
             </div>
             <div>
+              <label htmlFor="password" className="sr-only">
+                密码
+              </label>
               <input
+                id="password"
+                name="password"
                 type="password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
@@ -99,4 +110,4 @@ export default function Login() {
       </div>
     </div>
   )
-} 
+}
