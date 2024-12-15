@@ -1,47 +1,39 @@
-// pages/login.tsx
-'use client'
+"use client";
 
-import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import Link from 'next/link'
-
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import { message } from "antd";
 
 export default function Login() {
-  const router = useRouter()
+  const router = useRouter();
+  const [messageApi, contextHolder] = message.useMessage();
   const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-  })
-  const [error, setError] = useState('')
+    username: "",
+    password: "",
+  });
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setError('')
+    e.preventDefault();
+    const res = await fetch("/api/auth/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
 
-    try {
-      const res = await fetch('/api/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-
-      const data = await res.json()
-
-      if (!res.ok) {
-        throw new Error(data.error || 'Login failed')
-      }
-
-      // 登录成功，跳转到首页
-      router.push('/')
-      router.refresh()
-    } catch (err: any) {
-      setError(err.message)
+    const data = await res.json();
+    if (data.code) {
+      messageApi.error("登录失败");
+    } else {
+      router.push("/");
+      router.refresh();
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
+      {contextHolder}
       <div className="max-w-md w-full space-y-8 p-8 bg-white rounded-lg shadow">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
@@ -49,9 +41,6 @@ export default function Login() {
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-          {error && (
-            <div className="text-red-500 text-center text-sm">{error}</div>
-          )}
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="username" className="sr-only">
@@ -109,5 +98,5 @@ export default function Login() {
         </form>
       </div>
     </div>
-  )
+  );
 }

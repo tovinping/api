@@ -9,6 +9,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "antd": "^5.22.5",
     "bcryptjs": "^2.4.3",
     "jose": "^5.9.6",
     "jsonwebtoken": "^9.0.2",
