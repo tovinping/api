@@ -5,6 +5,7 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 
+
 export default function Login() {
   const router = useRouter()
   const [formData, setFormData] = useState({
@@ -12,7 +13,6 @@ export default function Login() {
     password: '',
   })
   const [error, setError] = useState('')
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setError('')
@@ -28,13 +28,13 @@ export default function Login() {
 
       const data = await res.json()
 
-      if (!res.ok) {
-        throw new Error(data.error || 'Login failed')
-      }
+      // if (!res.ok) {
+      //   throw new Error(data.error || 'Login failed')
+      // }
 
       // 登录成功，跳转到首页
-      router.push('/')
-      router.refresh()
+      // router.push('/')
+      // router.refresh()
     } catch (err: any) {
       setError(err.message)
     }
