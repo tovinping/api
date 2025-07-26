@@ -101,49 +101,54 @@ export default function Login() {
   );
 }
 
-type IBaseType = number | string //| object | boolean;
+type IBaseType = number | string; //| object | boolean;
 
 export interface ICallbackData {
-  isEnd: boolean
-  params: IBaseType
+  isEnd: boolean;
+  params: IBaseType;
 }
 
 // 定义一个联合类型
-type UnionToFunctionUnion<T> = T extends infer U ? (arg: U, cb: (data: ICallbackData) => void) => T | Promise<T> | void : never;
+type UnionToFunctionUnion<T> = T extends infer U
+  ? (arg: U, cb: (data: ICallbackData) => void) => T | Promise<T> | void
+  : never;
 
 // 转换后的联合函数类型
 type OutputType = UnionToFunctionUnion<IBaseType>;
 
 function fibonacci(n: number): number {
   if (n == 1 || n == 2) {
-    return 1
+    return 1;
   }
   return fibonacci(n - 2) + fibonacci(n - 1);
 }
-type gg = (d: string, cb: (data: ICallbackData) => void) => void
+type gg = (d: string, cb: (data: ICallbackData) => void) => void;
 const f1: gg = (d: string, cb: Function) => {
   // cb({ isEnd: true, params: 1 })
-}
-const f2: OutputType = () => 1
-const f3: OutputType = (n: number) => Promise.resolve(n)
+};
+const f2: OutputType = () => 1;
+const f3: OutputType = (n: number) => Promise.resolve(n);
 export const map = new Map<string, OutputType>([
-  ['test', fibonacci],
-  ['test1', f1],
-  ['test2', f2],
-  ['test3', f3],
+  ["test", fibonacci],
+  ["test1", f1],
+  ["test2", f2],
+  ["test3", f3],
 ]);
 
-const g: string = 'aaa'
-const param: IBaseType | undefined = undefined
-const method = map.get(g) as (arg: IBaseType | undefined, cb: (data: ICallbackData) => void) => Promise<ICallbackData> | void | IBaseType
+const g: string = "aaa";
+const param: IBaseType | undefined = undefined;
+const method = map.get(g) as (
+  arg: IBaseType | undefined,
+  cb: (data: ICallbackData) => void
+) => Promise<ICallbackData> | void | IBaseType;
 if (method) {
   // 根据 `OutputType` 的定义，`method` 的第一个参数类型是 `IBaseType`，回调函数需要返回 `ICallbackData` 类型
   const reuslt = method(param, (data: ICallbackData) => {
-    console.log(data)
-  })
+    console.log(data);
+  });
   if (reuslt && reuslt instanceof Promise) {
     reuslt.then((data) => {
-      console.log(data)
-    })
+      console.log(data);
+    });
   }
 }
