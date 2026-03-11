@@ -7,6 +7,7 @@ const publicPaths = [
   "/api/auth/register",
   "/api/auth/logout",
   "/api/hello",
+  "/api/test",
 ];
 
 export async function middleware(request: NextRequest) {
